@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+  <script src="http://maps.googleapis.com/maps/api/js?&sensor=true"></script>﻿	
+  <script type="text/javascript">
+  
+	function localizar()
+	{
+		navigator.geolocation.getCurrentPosition(mapa,error);
+	}
+	
+	function mapa(pos)
+	{
+		var latitud = pos.coords.latitude;
+		var longitud = pos.coords.longitude;
+		var precision = pos.coords.accuracy;
+		
+		var centro = new google.maps.LatLng(latitud, longitud);
+		var boti1P = new google.maps.LatLng(-33.58648584397416, -70.58642193675041);
+		var boti2P = new google.maps.LatLng(-33.58164372236292, -70.58028638362885);
+		var boti3P = new google.maps.LatLng(-33.58011081136841, -70.58765977621078);
+		
+		
+		var propiedades = {
+				center: centro,
+				KeyBoardShortcuts: true,
+				mapTypeControl: false,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				navigationControl: true,
+				streetViewControl: false,
+				zoom: 15,
+				
+		};
+		var map = new google.maps.Map(document.getElementById("map"), propiedades);
+		var marker =  new google.maps.Marker({
+		position:centro,
+		map: map,
+		title:"Esta es tu Posicion"
+		
+		});
+		marker.setIcon('https://dl.dropboxusercontent.com/u/20056281/Iconos/male-2.png');
+		
+		//marker.setMap(map);
+		var mboti1 =  new google.maps.Marker({
+		position:boti1P,
+		map: map,
+		title:"Botilleria Juan Perez"
+		
+		});
+		var mboti2 =  new google.maps.Marker({
+		position:boti2P,
+		map: map,
+		title:"Botilleria Romeral"
+		
+		});
+		var mboti3 =  new google.maps.Marker({
+		position:boti3P,
+		map: map,
+		title:"Botilleria Ron Damon"
+		
+		});
+		mboti1.setIcon('images/financial-services.png');
+		mboti2.setIcon('images/financial-services.png');
+		
+		
+		
+	}
+	
+	function error(errorC)
+	{
+		if(errorC.code == 0)
+			alert("Error desconocido");
+		else if(errorC.code == 1)
+			alert("No se permitio acceso a su Ubicacion");
+		else if(errorC.code == 2)	
+			alert("Posicion no disponible");
+		else if	(errorC.code == 3)
+			alert("Tiempo de espera superado");
+		
+	}
+  
+  </script>	
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <title>index</title>
+  <link href="http://fonts.googleapis.com/css?family=Bitter:400" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/standardize.css">
+  <link rel="stylesheet" href="css/index-grid.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="body page-index clearfix" onload="localizar()">
+  <div id="logo" class="container container-1"></div>
+  <div class="container container-2"></div>
+  <div class="element element-1"></div>
+  <button onClick="window.location='index.html';" class="_button _button-1">Home</button>
+  <button onClick="window.location='quienes-somos.html';" class="_button _button-2">Quienes Somos</button>
+  <button onClick="window.location='contacto.html';" class="_button _button-3">Contacto</button>
+  <div class="element element-2"></div>
+  <p onClick="window.location='productos.html';" class="text text-1"><a>Productos</a></p>
+  <p onClick="window.location='botillerias.html';" class="text text-2"><a>Botillerias</a></p>
+  <p onClick="window.location='ofertas.html';" class="text text-3"><a>Ofertas</a></p>
+  <div id="map" class="container container-3"></div>
+  <!--<div class="wrapper"><!--<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps?t=m&amp;q=santiago&amp;output=embed"></iframe></div>-->
+</body>
+</html>
